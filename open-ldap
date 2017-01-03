@@ -10,8 +10,22 @@ chown ldap. /var/lib/ldap/DB_CONFIG
 systemctl enable slapd
 systemctl start slapd
 
+yum -y install httpd
+yum -y install epel-release
+yum -y install phpldapadmin
+# some source editing
+# Tell SE linux what's going on, so that it doesn't freek
+setsebool -P httpd_can_connect_ldap on
 
 
+
+
+# decent config guide: http://www.itzgeek.com/how-tos/linux/centos-how-tos/install-configure-phpldapadmin-centos-7-ubuntu-16-04.html
+
+
+
+#Note: LDAP comes up completely insecure, with Anonymous login enabled by default... this is not a good and happy thing, so fix 
+#it in the config file
 #(prompt for user input), the following is currently a manual config, but could be automated fairly easily
 #slappasswd
 #open tcp port 389
