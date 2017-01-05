@@ -1,1 +1,17 @@
+# decent doc: http://www.itzgeek.com/how-tos/linux/centos-how-tos/setup-syslog-server-on-centos-7-rhel-7.html
+#rsyslog already installed.
 
+ 1  vi /etc/rsyslog.conf
+    (uncomment TCP and UDP available ports)
+    2  systemctl restart rsyslog.service
+    6  yum install net-tools
+    8  netstat -antup | grep 514
+
+
+# still need to secure log server
+
+
+#client push: 
+
+echo "*.info;mail.none;authpriv.none;cron.none   @10.128.0.7" >> /etc/rsyslog.conf && systemctl restart rsyslog.service
+#Important: this should be the internal not external IP of the server.
